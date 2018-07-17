@@ -39,19 +39,6 @@ class Board
   end
 
   def victory?(player1, player2)
-    #à partir du tableau de tableau (qui n'a servi à rien au final), on le flatten
-    #puis comme c'est un tableau de boardman
-    #on .map value
-    #pour qu'il devienne un tableau de value
-    #càd un tableau de string ou de integer
-    tablo = @cases.flatten.map(&:value)
-    #on vérifie si le tableau est composé entièrement de string
-    #càd c'est un draw
-    if tablo.all?(String)
-      puts "draw mfw"
-      player1.state = "draw"
-      player2.state = "draw"
-    end
     win_combos = [[@boardcase_1, @boardcase_2, @boardcase_3], #Array des combinaisons gagnantes
                   [@boardcase_1, @boardcase_4, @boardcase_7],
                   [@boardcase_1, @boardcase_5, @boardcase_9],
@@ -69,6 +56,23 @@ class Board
       elsif combos[0].to_s == player2.value && combos[1].to_s == player2.value && combos[2].to_s == player2.value
         puts player2.name + " " + "won"
         player2.state = "win"
+      end
+
+      #à partir du tableau de tableau (qui n'a servi à rien au final), on le flatten
+      #puis comme c'est un tableau de boardman
+      #on .map value
+      #pour qu'il devienne un tableau de value
+      #càd un tableau de string ou de integer
+      tablo = @cases.flatten.map(&:value)
+      #on vérifie si le tableau est composé entièrement de string
+      #càd c'est un draw
+      #unless il y a déjà un win
+      if tablo.all?(String) 
+        unless (player1.state = "win" || player2.state = "win")
+        end
+        puts "draw mfw"
+        player1.state = "draw"
+        player2.state = "draw"
       end
     end
   end
