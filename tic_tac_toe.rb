@@ -67,13 +67,13 @@ class Board
       #on vérifie si le tableau est composé entièrement de string
       #càd c'est un draw
       #unless il y a déjà un win
-      unless (player1.state = "win" || player2.state = "win")
+      #unless (player1.state = "win" || player2.state = "win")
         if tablo.all?(String) 
           puts "draw mfw"
           player1.state = "draw"
           player2.state = "draw"
         end
-      end
+      #end
     end
   end
 
