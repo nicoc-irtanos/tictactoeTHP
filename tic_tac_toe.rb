@@ -45,9 +45,9 @@ class Board
     puts @cases[2].join("|")
   end
 
-  def play(num)
+  def play(player,num)
     #TO DO : une méthode qui change la BoardCase jouée en fonction de la valeur du joueur (X, ou O)
-    @cases.flatten(num-1).value = @player1.value
+    @cases.flatten[num-1].value = player.value
   end
 
   def victory?
@@ -96,10 +96,9 @@ class Game
     #else
       #switch les joueurs
       @player1, @player2 = @player2, @player1
-      puts @player1.value
     puts "tour de :" + @player1.name.to_s
     puts "choisisez une case"
-    @board.play(gets.chomp.to_i)
+    @board.play(@player1,gets.chomp.to_i)
     @board.to_s
 
     
