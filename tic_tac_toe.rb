@@ -47,39 +47,17 @@ class Board
 
   def play(player,num)
     #TO DO : une méthode qui change la BoardCase jouée en fonction de la valeur du joueur (X, ou O)
-    if @cases.flatten[num-1] == ("O" || "X")
-      puts "invalid move"
+    if @cases.flatten[num-1].value == ("O")
+      puts "invalid move, player change"
       turn
+    elsif @cases.flatten[num-1].value == ("X")
+      puts "invalid move, player change"
     else @cases.flatten[num-1].value = player.value
     end
   end
 
-  def victory?(player1,player2)
+  def victory?
     #TO DO : qui gagne ?
-    cases.each do |i|
-      if i.uniq == player1.value
-        puts player1.name
-      elsif i.uniq == player2.value
-        puts player2.name
-      end
-    end
-    cases.transpose.each do |i|
-      if i.uniq == player1.value
-        puts player1.name
-      elsif i.uniq == player2.value
-        puts player2.name
-      end
-    end
-    if [cases.flatten[0],cases.flatten[4],cases.flatten[8]].uniq == player1.value
-      puts player1.name
-    elsif [cases.flatten[0],cases.flatten[4],cases.flatten[8]].uniq == player2.value
-      puts player2.name
-    end
-    if [cases.flatten[2],cases.flatten[4],cases.flatten[6]].uniq == player1.value
-      puts player1.name
-    elsif [cases.flatten[2],cases.flatten[4],cases.flatten[6]].uniq == player2.value
-      puts player2.name
-    end
   end
 end
 
@@ -118,19 +96,16 @@ class Game
     #if board.victory?
 
     #else
-    
+
     while (@player1.state == "" and @player2.state == "") do
-    puts "tour de :" + @player1.name.to_s
-    puts "choisisez une case"
+    puts @player1.name.to_s + "'s turn"
+    puts "Choose a case"
     @board.play(@player1,gets.chomp.to_i)
     @board.to_s
     #switch les joueurs
     @player1, @player2 = @player2, @player1
     end
-
-    
   end
-
 end
 
 Game.new.go
