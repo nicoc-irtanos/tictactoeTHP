@@ -2,9 +2,9 @@ class BoardCase
 
   attr_accessor :value, :case_number
 
-  def initialize(value = " ",case_number)
+  def initialize(case_number)
     #TO DO doit régler sa valeur, ainsi que son numéro de case
-    @value = value
+    @value = case_number
     @case_number = case_number
   end
 
@@ -32,20 +32,30 @@ class Board
     @boardcase_7 = BoardCase.new(7)
     @boardcase_8 = BoardCase.new(8)
     @boardcase_9 = BoardCase.new(9)
-    cases = [@boardcase_1, @boardcase_2, @boardcase_3, @boardcase_4, @boardcase_5, @boardcase_6, @boardcase_7, @boardcase_8, @boardcase_9]
+    @cases = [[@boardcase_1, @boardcase_2, @boardcase_3], [@boardcase_4, @boardcase_5, @boardcase_6], [@boardcase_7, @boardcase_8, @boardcase_9]]
   end
 
   def to_s
-  #TO DO : afficher le plateau
-    puts @boardcase_1.to_s + "|" + @boardcase_2.to_s + "|" +  @boardcase_3.to_s , @boardcase_4.to_s + "|" +  @boardcase_5.to_s + "|" +  @boardcase_6.to_s, @boardcase_7.to_s + "|" +  @boardcase_8.to_s + "|" + @boardcase_9.to_s
+    #TO DO : afficher le plateau
+    @cases.each do |board|
+      board = board.to_s
+    end
+    puts @cases[0].join("|")
+    puts @cases[1].join("|")
+    puts @cases[2].join("|")
   end
 
-  def play
+  def play(num)
     #TO DO : une méthode qui change la BoardCase jouée en fonction de la valeur du joueur (X, ou O)
+    @cases.flatten(num-1).value = @player1.value
   end
 
   def victory?
     #TO DO : qui gagne ?
+    if truc 
+      player1
+    end
+
   end
 end
 
@@ -59,6 +69,7 @@ class Player
     puts "Set your name:"
     @name = gets.chomp
     @value = value
+    @state = ""
   end
 end
 
@@ -73,12 +84,25 @@ class Game
   def go
     # TO DO : lance la partie
     puts "Welcome to the Tic tac toe game !"
+    @board.to_s
     turn
   end
 
   def turn
     #TO DO : affiche le plateau, demande au joueur il joue quoi, vérifie si un joueur a gagné, passe au joueur suivant si la partie n'est pas finie
+
+    #if board.victory?
+
+    #else
+      #switch les joueurs
+      @player1, @player2 = @player2, @player1
+      puts @player1.value
+    puts "tour de :" + @player1.name.to_s
+    puts "choisisez une case"
+    @board.play(gets.chomp.to_i)
     @board.to_s
+
+    
   end
 
 end
