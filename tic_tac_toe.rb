@@ -78,11 +78,11 @@ class Board
   end
 
   def play(player, num) #Changement des numéros initiaux en O ou X. Si l'input n'est pas un numéro, on passe le tour. Tolérance 0 !
-    if @cases.flatten[num - 1].value == "O"
+    if @cases.flatten.fetch(num - 1,"non").value == "O"
       puts "invalid move, player change"
-    elsif @cases.flatten[num - 1].value == "X"
+    elsif @cases.flatten.fetch(num - 1,"non").value == "X"
       puts "invalid move, player change"
-    else @cases.flatten[num - 1].value = player.value
+    else @cases.flatten.fetch(num - 1,"non").value = player.value
     end
   end
 end
@@ -115,7 +115,7 @@ class Game
 
   def turn
     while (@player1.state == "") && (@player2.state = "")
-      puts @player1.name.to_s + "'s turn"
+      puts @player1.name.to_s + "'s turn: " + @player1.value
       puts "choose a case"
       @board.play(@player1, gets.chomp.to_i) #la méthode play a besoin des arguments
       @board.to_s
