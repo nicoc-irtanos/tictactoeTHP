@@ -54,6 +54,10 @@ end
 class Game
   def initialize
     #TO DO : créé 2 joueurs, créé un board
+    puts "Welcome to the Tic tac toe game !"
+    @player1 = Player.new
+    @player2 = Player.new
+    @board = Board.new
   end
 
   def go
