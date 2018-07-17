@@ -47,15 +47,39 @@ class Board
 
   def play(player,num)
     #TO DO : une méthode qui change la BoardCase jouée en fonction de la valeur du joueur (X, ou O)
-    @cases.flatten[num-1].value = player.value
+    if @cases.flatten[num-1] == ("O" || "X")
+      puts "invalid move"
+      turn
+    else @cases.flatten[num-1].value = player.value
+    end
   end
 
-  def victory?
+  def victory?(player1,player2)
     #TO DO : qui gagne ?
-    if truc 
-      player1
+    cases.each do |i|
+      if i.uniq == player1.value
+        puts player1.name
+      elsif i.uniq == player2.value
+        puts player2.name
+      end
     end
-
+    cases.transpose.each do |i|
+      if i.uniq == player1.value
+        puts player1.name
+      elsif i.uniq == player2.value
+        puts player2.name
+      end
+    end
+    if [cases.flatten[0],cases.flatten[4],cases.flatten[8]].uniq == player1.value
+      puts player1.name
+    elsif [cases.flatten[0],cases.flatten[4],cases.flatten[8]].uniq == player2.value
+      puts player2.name
+    end
+    if [cases.flatten[2],cases.flatten[4],cases.flatten[6]].uniq == player1.value
+      puts player1.name
+    elsif [cases.flatten[2],cases.flatten[4],cases.flatten[6]].uniq == player2.value
+      puts player2.name
+    end
   end
 end
 
@@ -63,7 +87,7 @@ class Player
   #TO DO : la classe a 2 attr_accessor, son nom, sa valeur (X ou O). Elle a un attr_writer : il a gagné ?
 
   attr_accessor :name, :value #Noms et valeurs
-  attr_writer :state #Victoire ou défaite
+  attr_accessor :state #Victoire ou défaite
 
   def initialize(value)
     puts "Set your name:"
@@ -94,12 +118,15 @@ class Game
     #if board.victory?
 
     #else
-      #switch les joueurs
-      @player1, @player2 = @player2, @player1
+    
+    while (@player1.state == "" and @player2.state == "") do
     puts "tour de :" + @player1.name.to_s
     puts "choisisez une case"
     @board.play(@player1,gets.chomp.to_i)
     @board.to_s
+    #switch les joueurs
+    @player1, @player2 = @player2, @player1
+    end
 
     
   end
