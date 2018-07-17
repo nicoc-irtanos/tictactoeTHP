@@ -25,3 +25,9 @@ Each time, the mentioned player must type in the terminal the number correspondi
 See who wins (or not!)
 
 ## Known imperfections
+
+If a player wins whend filling the last case, shows draw mfw along with win
+
+When winning, plays another turn and thus the other player can also win
+
+If the user's input's is a number higher than 9, then the program crashes
